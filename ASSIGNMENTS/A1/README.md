@@ -1,6 +1,6 @@
 # Assignment 1
 
-## Due August 27th before midnight
+## Due January 20th before class. 
 
 ## Task
 
