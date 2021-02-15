@@ -20,4 +20,4 @@ http://localhost:1234/div?a=1&b=4
 
 $ `node mathServer.js`
 
-got to <http://127.0.0.1:1234> in your browser.
+go to <http://127.0.0.1:1234> in your browser.
