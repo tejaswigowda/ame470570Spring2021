@@ -1,3 +1,5 @@
+var Client = require('node-rest-client').Client;
+var client = new Client();
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
@@ -12,6 +14,12 @@ app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
+app.get("/getFeedData", function (req, res) {
+  var feed = req.query.feed;
+  client.get(feed, function (data, response) {
+    res.send(data);
+  });
+});
 
 app.get("/getFeeds", function (req, res) {
     res.send(JSON.stringify(rssList));

@@ -1,27 +1,122 @@
 <html>
 
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+body{
+  margin:0;
+}
+#feedList
+{
+  width: 30%;
+  left: 0;
+  height: 100vh;
+  overflow: scroll;
+  background: gray;
+  position:absolutel
+}
+#itemList
+{
+  width: 30%;
+  position:absolute;
+  top: 0;
+  margin-left: 30%;
+  height: 100vh;
+  overflow: scroll;
+  background: lightgray;
+}
+#itemDetails
+{
+  width: 40%;
+  position:absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  overflow: scroll;
+}
+.active{
+  background:gold;
+}
+#feedList button,
+#itemList button{
+  width: 100%;
+  min-height: 50px;
+}
+</style>
   <script src='asyncReq.js'> </script>
-
   <script>
-    function calc(){
-      var a = document.getElementById("valA").value;
-      var url = "./eval?a=" + encodeURIComponent(a);
-      loadFile(url ,function(d){
-        document.getElementById("result").innerHTML = d;
-      })
+var allFeeds = [];
+var allItems = [];
+var currFeed = 0;
+
+function generateFeedMarkup()
+{
+  var markup = "";
+  for(var i = 0; i < allFeeds.length; i++){
+    markup += "<button onclick='feedSelected("+i+")'>" + allFeeds[i] + "</button>"
+  }
+  document.getElementById("feedList").innerHTML = markup;
+}
+
+function start()
+{
+  getAllFeeds();
+}
+
+function getAllFeeds()
+{
+  loadFile("./getFeeds", function(data){
+      allFeeds = JSON.parse(data);
+      generateFeedMarkup();
+  });
+}
+
+function addFeed()
+{
+  var feed = prompt("Enter feed URL:");
+  var url = "./addFeed?feed=" + feed;
+  loadFile(url, function(data){
+      allFeeds = JSON.parse(data);
+      generateFeedMarkup();
+  });
+}
+
+function feedSelected(n)
+{
+  $("#feedList button").removeClass("active");
+  $("#feedList button:nth-of-type("+ (n+1) +")").addClass("active");
+  currFeed = n;
+  var feed = allFeeds[n];
+  loadFile("./getFeedData?feed="+ feed, function(data){
+    var obj = JSON.parse(data);
+    var items = obj.feed.results;
+    allItems = items;
+    var markup = "";
+
+    for(var i = 0; i < items.length; i++){
+      markup+= "<button onclick='itemSelected("+i+")'>" +
+         '<p>' + items[i].name + '</p>'+
+         '<p>' + items[i].artistName + '</p>'+
+        "</button>"
     }
+    document.getElementById("itemList").innerHTML = markup;
+  });
+}
   </script>
 </head>
 
-<body>
+<body onload='start()'>
 
-  <textarea id='valA'></textarea>
-  
-    <br>
-  <button onclick='calc()'> Calculate </button>
+<div id='feedList'>
+</div>
 
-  <div id='result'> </div>
+<div id='itemList'>
+</div>
+
+<div id='itemDetails'>
+</div>
+
+<button onclick='addFeed()' style='position:fixed;bottom:5px;left:5px'> Add Feed </button>
 </body>
 
 </html>
