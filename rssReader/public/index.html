@@ -81,6 +81,18 @@ function addFeed()
   });
 }
 
+function itemSelected(n)
+{
+  $("#itemList button").removeClass("active");
+  $("#itemList button:nth-of-type("+ (n+1) +")").addClass("active");
+  var markup = "";
+
+
+
+
+  document.getElementById("itemDetails").innerHTML = markup;
+}
+ 
 function feedSelected(n)
 {
   $("#feedList button").removeClass("active");
