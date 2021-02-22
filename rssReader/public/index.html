@@ -33,6 +33,7 @@ body{
   right: 0;
   height: 100vh;
   overflow: scroll;
+  text-align:center;
 }
 .active{
   background:gold;
@@ -48,6 +49,7 @@ body{
 var allFeeds = [];
 var allItems = [];
 var currFeed = 0;
+var currItem = 0;
 
 function generateFeedMarkup()
 {
@@ -83,10 +85,16 @@ function addFeed()
 
 function itemSelected(n)
 {
+  currItem = n;
   $("#itemList button").removeClass("active");
   $("#itemList button:nth-of-type("+ (n+1) +")").addClass("active");
-  var markup = "";
+  var itemInfo = allItems[currItem];
 
+
+  var markup = "";
+  markup += "<img src='"+ itemInfo.artworkUrl100 +"'>";
+  markup += "<h1>" + itemInfo.name +"</h1>"
+  markup += "<h2>" + itemInfo.artistName +"</h2>"
 
 
 
