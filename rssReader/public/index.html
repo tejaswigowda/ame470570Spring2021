@@ -1,142 +1,22 @@
 <html>
-
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-body{
-  margin:0;
-}
-#feedList
-{
-  width: 30%;
-  left: 0;
-  height: 100vh;
-  overflow: scroll;
-  background: gray;
-  position:absolutel
-}
-#itemList
-{
-  width: 30%;
-  position:absolute;
-  top: 0;
-  margin-left: 30%;
-  height: 100vh;
-  overflow: scroll;
-  background: lightgray;
-}
-#itemDetails
-{
-  width: 40%;
-  position:absolute;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  overflow: scroll;
-  text-align:center;
-}
-.active{
-  background:gold;
-}
-#feedList button,
-#itemList button{
-  width: 100%;
-  min-height: 50px;
-}
-</style>
   <script src='asyncReq.js'> </script>
-  <script>
-var allFeeds = [];
-var allItems = [];
-var currFeed = 0;
-var currItem = 0;
-
-function generateFeedMarkup()
-{
-  var markup = "";
-  for(var i = 0; i < allFeeds.length; i++){
-    markup += "<button onclick='feedSelected("+i+")'>" + allFeeds[i] + "</button>"
-  }
-  document.getElementById("feedList").innerHTML = markup;
-}
-
-function start()
-{
-  getAllFeeds();
-}
-
-function getAllFeeds()
-{
-  loadFile("./getFeeds", function(data){
-      allFeeds = JSON.parse(data);
-      generateFeedMarkup();
-  });
-}
-
-function addFeed()
-{
-  var feed = prompt("Enter feed URL:");
-  var url = "./addFeed?feed=" + feed;
-  loadFile(url, function(data){
-      allFeeds = JSON.parse(data);
-      generateFeedMarkup();
-  });
-}
-
-function itemSelected(n)
-{
-  currItem = n;
-  $("#itemList button").removeClass("active");
-  $("#itemList button:nth-of-type("+ (n+1) +")").addClass("active");
-  var itemInfo = allItems[currItem];
-
-
-  var markup = "";
-  markup += "<img src='"+ itemInfo.artworkUrl100 +"'>";
-  markup += "<h1>" + itemInfo.name +"</h1>"
-  markup += "<h2>" + itemInfo.artistName +"</h2>"
-
-
-
-  document.getElementById("itemDetails").innerHTML = markup;
-}
- 
-function feedSelected(n)
-{
-  $("#feedList button").removeClass("active");
-  $("#feedList button:nth-of-type("+ (n+1) +")").addClass("active");
-  currFeed = n;
-  var feed = allFeeds[n];
-  loadFile("./getFeedData?feed="+ feed, function(data){
-    var obj = JSON.parse(data);
-    var items = obj.feed.results;
-    allItems = items;
-    var markup = "";
-
-    for(var i = 0; i < items.length; i++){
-      markup+= "<button onclick='itemSelected("+i+")'>" +
-         '<p>' + items[i].name + '</p>'+
-         '<p>' + items[i].artistName + '</p>'+
-        "</button>"
-    }
-    document.getElementById("itemList").innerHTML = markup;
-  });
-}
+  <link rel='stylesheet' href='style.css'>
+  <script src='script.js'>
   </script>
 </head>
-
 <body onload='start()'>
-
-<div id='feedList'>
-</div>
-
-<div id='itemList'>
-</div>
-
-<div id='itemDetails'>
-</div>
-
-<button onclick='addFeed()' style='position:fixed;bottom:5px;left:5px'> Add Feed </button>
+  <div id='feedList'>
+  </div>
+  <div id='itemListWrapper'>
+    <button onclick='editFeed()' style='display:none'> Edit Feed </button>
+    <button onclick='deleteFeed()' style='display:none'> Delete Feed </button>
+    <div id='itemList'>
+    </div>
+  </div>
+  <div id='itemDetails'>
+  </div>
+  <button onclick='addFeed()' style='position:fixed;bottom:5px;left:5px'> Add Feed </button>
 </body>
-
 </html>

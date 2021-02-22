@@ -25,9 +25,29 @@ app.get("/getFeeds", function (req, res) {
     res.send(JSON.stringify(rssList));
 });
 
+app.get("/deleteFeed", function (req, res) {
+  var index = parseInt(req.query.feedno);
+  rssList.splice(index, 1);
+  res.send(JSON.stringify(rssList));
+});
+
+
+app.get("/editFeed", function (req, res) {
+  var index = parseInt(req.query.feedno);
+  var newname  = req.query.newname;
+  rssList[index].name = newname;
+  res.send(JSON.stringify(rssList));
+});
+
 app.get("/addFeed", function (req, res) {
   var feed = req.query.feed;
-  rssList.push(feed);
+  var name = req.query.name;
+  var obj = {
+    name: name,
+    feed: feed,
+    time: new Date().getTime()
+  }
+  rssList.push(obj);
   res.send(JSON.stringify(rssList));
 });
 

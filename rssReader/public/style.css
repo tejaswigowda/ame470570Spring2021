@@ -1,0 +1,40 @@
+body{
+  margin:0;
+}
+#feedList
+{
+  width: 30%;
+  left: 0;
+  height: 100vh;
+  overflow: scroll;
+  background: gray;
+  position:absolutel
+}
+#itemListWrapper
+{
+  width: 30%;
+  position:absolute;
+  top: 0;
+  margin-left: 30%;
+  height: 100vh;
+  overflow: scroll;
+  background: lightgray;
+}
+#itemDetails
+{
+  width: 40%;
+  position:absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  overflow: scroll;
+  text-align:center;
+}
+.active{
+  background:gold;
+}
+#feedList button,
+#itemList button{
+  width: 100%;
+  min-height: 50px;
+}
