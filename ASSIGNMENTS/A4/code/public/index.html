@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <script src='asyncReq.js'> </script>
+
+  <script>
+    function calc(){
+      var a = parseFloat(document.getElementById("valA").value);
+      var b = parseFloat(document.getElementById("valB").value);
+      var op = document.getElementById("operator").value;
+    }
+  </script>
+</head>
+
+<body>
+
+  <input type='text' id='valA' onchange='calc()'>
+  <select id='operator' onchange='calc()'>
+    <option val='add'>+</option>
+    <option val='sub'>-</option>
+    <option val='mul'>*</option>
+    <option val='div'>/</option>
+  </select>
+  <input type='text' id='valB' onchange='calc()'>
+  
+
+  <div id='result'> </div>
+</body>
+
+</html>
