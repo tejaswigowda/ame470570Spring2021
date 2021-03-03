@@ -8,6 +8,8 @@ var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 1234;
 
+var MS = require("mongoskin");
+var db = MS.db("mongodb://34.219.163.158:27017/rssFeeds")
 var rssList = [];
 
 app.get("/", function (req, res) {
@@ -22,7 +24,9 @@ app.get("/getFeedData", function (req, res) {
 });
 
 app.get("/getFeeds", function (req, res) {
-    res.send(JSON.stringify(rssList));
+  db.collection("data").find({}).toArray(function(e1,r1){
+    res.send(JSON.stringify(r1));
+  });
 });
 
 app.get("/deleteFeed", function (req, res) {
@@ -47,8 +51,11 @@ app.get("/addFeed", function (req, res) {
     feed: feed,
     time: new Date().getTime()
   }
-  rssList.push(obj);
-  res.send(JSON.stringify(rssList));
+  db.collection("data").insert(obj, function(err,result){
+    db.collection("data").find({}).toArray(function(e1,r1){
+      res.send(JSON.stringify(r1));
+    });
+  });
 });
 
 
