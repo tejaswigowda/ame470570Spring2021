@@ -37,16 +37,23 @@ app.get("/deleteFeed", function (req, res) {
 
 
 app.get("/editFeed", function (req, res) {
-  var index = parseInt(req.query.feedno);
+  var feedid = req.query.feedid;
   var newname  = req.query.newname;
-  rssList[index].name = newname;
-  res.send(JSON.stringify(rssList));
+  db.collection("data").findOne({id:feedid}, function(err,result){
+    result.name = newname;
+    db.collection("data").save(result, function(e,r){
+      db.collection("data").find({}).toArray(function(e1,r1){
+        res.send(JSON.stringify(r1));
+      });
+    });
+  })
 });
 
 app.get("/addFeed", function (req, res) {
   var feed = req.query.feed;
   var name = req.query.name;
   var obj = {
+    id: new Date().getTime().toString(),
     name: name,
     feed: feed,
     time: new Date().getTime()

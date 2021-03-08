@@ -96,7 +96,7 @@ function editFeed()
   var newname = prompt("Edit Feed name", allFeeds[currFeed].name);
   if(newname.length <=0 ) return;
 
-  loadFile("./editFeed?feedno=" + currFeed +"&newname=" + newname, function(data){
+  loadFile("./editFeed?feedid=" + allFeeds[currFeed].id +"&newname=" + newname, function(data){
       allFeeds = JSON.parse(data);
       generateFeedMarkup();
       $("#itemListWrapper button").hide();
