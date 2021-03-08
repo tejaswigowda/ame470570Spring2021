@@ -1,0 +1,21 @@
+{
+  "name": "rssreader",
+  "version": "1.0.0",
+  "description": "[Apple RSS Generator](https://rss.itunes.apple.com/en-us)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "tejaswigowda <tejaswi@foxyninjastudios.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^2.2.36",
+    "mongoskin": "^2.1.0",
+    "node-rest-client": "^3.1.0"
+  }
+}

@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src='asyncReq.js'> </script>
+  <link rel='stylesheet' href='style.css'>
+  <script src='script.js'>
+  </script>
+</head>
+<body onload='start()'>
+  <div id='feedList'>
+  </div>
+  <div id='itemListWrapper'>
+    <button onclick='editFeed()' style='display:none'> Edit Feed </button>
+    <button onclick='deleteFeed()' style='display:none'> Delete Feed </button>
+    <div id='itemList'>
+    </div>
+  </div>
+  <div id='itemDetails'>
+  </div>
+  <button onclick='addFeed()' style='position:fixed;bottom:5px;left:5px'> Add Feed </button>
+</body>
+</html>
