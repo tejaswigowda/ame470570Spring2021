@@ -119,4 +119,4 @@ function isLoggedIn(req, res, next) {
 }
 
 
-console.log("go to http://localhost:1234")
+console.log("go to http://localhost:8080")
