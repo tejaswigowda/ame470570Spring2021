@@ -117,3 +117,6 @@ function isLoggedIn(req, res, next) {
 
     res.send('noauth');
 }
+
+
+console.log("go to http://localhost:1234")
