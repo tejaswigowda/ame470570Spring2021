@@ -1,5 +1,5 @@
 # Assignment 6
-`Due Mar 19th, before class`
+`Due Mar 31th, before class`
 
 ## Task
 Deploy the attached simple RSS app (in `code` folder), over https using
