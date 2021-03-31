@@ -1,5 +1,5 @@
 # Assignment 6
-`Due Mar 19th, before class`
+`Due Mar 31st, before class`
 
 ## Task
 Deploy the attached simple RSS app (in `code` folder), over https using
@@ -16,6 +16,6 @@ AWS EC2.
 
 
 ## Todo
-Please update youyr se4rver IP here:
+Please update your server IP here:
 https://docs.google.com/spreadsheets/d/1pOQ2wcAATS2DCj23t4shKJZCnsfEweSIgrabg-QK1iw/edit?usp=sharing
 
