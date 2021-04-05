@@ -13,7 +13,7 @@ AWS EC2.
 4. `./portmap.sh`
 5. In EC2 'Security Groups' open ports 80,8080,443,8443
 6. Create a user in AWS IAM (enable S3 full access)
-7. Add user credentials in `credentials.json`
+7. Add user credentials in `credentials.json` (make sure you delete `.gitignore`)
 7. `forever start https.js`
 
 
