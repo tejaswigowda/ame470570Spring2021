@@ -9,13 +9,14 @@ AWS EC2.
 
 1. Make a copy of the code handout.
 2. Edit `https.js`.
-3. `chmod +x portmap.sh`
-4. `./portmap.sh`
-5. In EC2 'Security Groups' open ports 80,8080,443,8443
-6. Create a user in AWS IAM (enable S3 full access)
-7. Add user credentials in `credentials.json` (make sure you delete `.gitignore`)
-8. Change url in `public/index.html`
-9. `forever start https.js`
+3. Edit bucket name in `server.js`
+4. `chmod +x portmap.sh`
+5. `./portmap.sh`
+6. In EC2 'Security Groups' open ports 80,8080,443,8443
+7. Create a user in AWS IAM (enable S3 full access)
+8. Add user credentials in `credentials.json` (make sure you delete `.gitignore`)
+9. Change url in `public/index.html`
+10. `forever start https.js`
 
 
 ## Todo
