@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/tejaswigowda/simpleAuth#readme",
   "dependencies": {
+    "aws-sdk": "^2.881.0",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.2.0",

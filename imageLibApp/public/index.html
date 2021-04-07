@@ -8,8 +8,8 @@
   <script>
 var fileUploaded = function()
 {
-   var file = $('#theFileUploader').get(0);
-   var fileObj = $('#theFileUploader').get(0).files[0]
+   var file = $('#theFile').get(0);
+   var fileObj = $('#theFile').get(0).files[0]
    var filename = fileObj.name;
    var ext = filename.split(".");
    ext = ext[ext.length-1];
@@ -26,7 +26,7 @@ var fileUploaded = function()
     xhr.onreadystatechange = function(e) {  
       if (xhr.readyState != 4) { return; }
         // callback logic
-       document.getElementById("preview").src = "https://bucket470570.s3-us-west-2.amazonaws.com/" + fileInput;
+    //   document.getElementById("preview").src = "https://bucket470570.s3-us-west-2.amazonaws.com/" + fileInput;
     };
     xhr.open("POST", "/uploadFile", true);
     xhr.send(fd);
