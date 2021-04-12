@@ -2,6 +2,7 @@ var fs = require('fs');
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./credentials.json');
 var s3 = new AWS.S3();
+const multer = require('multer')
 
 var Client = require('node-rest-client').Client;
 var client = new Client();
@@ -40,7 +41,7 @@ var methodOverride = require("method-override");
 app.use(methodOverride());
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // parse application/json
 app.use(bodyParser.json())
@@ -115,28 +116,24 @@ app.get("/addFeed", function (req, res) {
 });
 
 
-app.post('/uploadFile', function(req, res){
+app.post('/uploadImage', function(req, res){
     var intname = req.body.fileInput;
-    var filename = req.files.input.name;
-    var fileType =  req.files.input.type;
-    var tmpPath = req.files.input.path;
+    console.log(intname);
     var s3Path = '/' + intname;
-    
-    fs.readFile(tmpPath, function (err, data) {
-        var params = {
-            Bucket:'bucket470570',
-            ACL:'public-read',
-            Key:intname,
-            Body: data,
-            ServerSideEncryption : 'AES256'
-        };
-        s3.putObject(params, function(err, data) {
-            res.end("success");
-            console.log(err);
-        });
+    var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64');
+    console.log(intname);
+    var params = {
+        Bucket:'bucket470570',
+        ACL:'public-read',
+        Key:intname,
+        Body: buf,
+        ServerSideEncryption : 'AES256'
+    };
+    s3.putObject(params, function(err, data) {
+        console.log(err);
+        res.end("success");
     });
-  });
-
+});
 
 
 app.use(express.static(path.join(__dirname, 'public')));

@@ -6,9 +6,9 @@
 
 //Bucket Configurations
 
- var bucketName = BUCKET_NAME;
- var bucketRegion = BUCKET_REGION;
- var IdentityPoolId = IDENTITY_POOL_ID;
+ var bucketName = 'bucket470570'
+ var bucketRegion = 'us-west-2';
+ var IdentityPoolId = 'us-west-2:7d4db2c1-5a83-478c-b51f-f11efb3f44c8';
 
  AWS.config.update({
                 region: bucketRegion,
@@ -33,7 +33,7 @@
     <button onclick="s3upload()">Submit</button>
     </div>
 
-    <progress max=”100” value=”0”></progress>
+    <progress max='100' value='0'></progress>
 
     <script type="text/javascript">
 
@@ -43,8 +43,8 @@
                 {
                     var file = files[0];
                     var fileName = file.name;
-                    var filePath = 'my-first-bucket-path/' + fileName;
-                    var fileUrl = 'https://' + BUCKET_REGION + '.amazonaws.com/my-first-bucket/' +  filePath;
+                    var filePath = bucketName + '/' + fileName;
+                    var fileUrl = 'https://' + bucketRegion + '.amazonaws.com/' + bucketName + '/' +  filePath;
             
                     s3.upload({
                                     Key: filePath,

@@ -14,22 +14,24 @@ var fileUploaded = function()
    var ext = filename.split(".");
    ext = ext[ext.length-1];
    console.log(ext);
+ 
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    console.log('RESULT', reader.result)
 
-   var fd = new FormData();
    var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
-   fd.append('fileInput', fileInput);
-   fd.append('input', file.files[0]);
-   fd.append('date', (new Date()).toString());
 
-    //fd.append('data', data);
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(e) {  
-      if (xhr.readyState != 4) { return; }
-        // callback logic
-    //   document.getElementById("preview").src = "https://bucket470570.s3-us-west-2.amazonaws.com/" + fileInput;
-    };
-    xhr.open("POST", "/uploadFile", true);
-    xhr.send(fd);
+   $.post("../uploadImage",
+	  {
+	    data: reader.result,
+      fileInput:fileInput
+	  },
+	  function(data, status){
+
+	  });
+     
+  }
+  reader.readAsDataURL(fileObj);
 }
 var doLogout = function()
 {
