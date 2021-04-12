@@ -130,8 +130,18 @@ app.post('/uploadImage', function(req, res){
         ServerSideEncryption : 'AES256'
     };
     s3.putObject(params, function(err, data) {
-        console.log(err);
-        res.end("success");
+      var obj = {
+        id: new Date().getTime().toString(),
+        name: "Untitled",
+        image: s3Path,
+        userid:req.body.userID,
+        time: new Date().getTime()
+      }
+      db.collection("data").insert(obj, function(err,result){
+        db.collection("data").find({userid:req.body.userID}).toArray(function(e1,r1){
+          res.send(JSON.stringify(r1));
+        });
+      });
     });
 });
 

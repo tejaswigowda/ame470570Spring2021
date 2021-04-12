@@ -10,16 +10,22 @@ var fileUploaded = function()
 {
   var file = $('#theFile').get(0);
   var fileObj = $('#theFile').get(0).files[0]
+   var filename = fileObj.name;
+   var ext = filename.split(".");
+   ext = ext[ext.length-1];
   var reader = new FileReader();
   reader.onloadend = function() {
     var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
      $.post("../uploadImage",
       {
         data: reader.result,
+        userID: userObj.local.email,
         fileInput:fileInput
       },
       function(data, status){
-
+        console.log(data);
+        allFeeds = JSON.parse(data);
+        generateFeedMarkup();
       });
   }
   reader.readAsDataURL(fileObj);
@@ -39,12 +45,10 @@ var doLogout = function()
   <div id='feedList'>
   </div>
   <div id='itemListWrapper'>
-    <button onclick='editFeed()' style='display:none'> Edit Feed </button>
-    <button onclick='deleteFeed()' style='display:none'> Delete Feed </button>
+    <button onclick='editFeed()' style='display:none'> Edit Image</button>
+    <button onclick='deleteFeed()' style='display:none'> Delete Image</button>
     <div id='itemList'>
     </div>
-  </div>
-  <div id='itemDetails'>
   </div>
   <input type="file" style='position:fixed;bottom:0' onchange='fileUploaded()'
        id="theFile" name="theFile"

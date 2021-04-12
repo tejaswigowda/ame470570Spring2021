@@ -2,6 +2,7 @@ var allFeeds = [];
 var allItems = [];
 var currFeed = 0;
 var currItem = 0;
+var bucketURL = "https://bucket470570.s3-us-west-2.amazonaws.com";
 
 function generateFeedMarkup()
 {
@@ -69,21 +70,9 @@ function feedSelected(n)
   $("#feedList button").removeClass("active");
   $("#feedList button:nth-of-type("+ (n+1) +")").addClass("active");
   currFeed = n;
-  var feed = allFeeds[n].feed;
-  loadFile("./getFeedData?feed="+ feed, function(data){
-    var obj = JSON.parse(data);
-    var items = obj.feed.results;
-    allItems = items;
-    var markup = "";
+  var image = allFeeds[n].image;
+  document.getElementById("itemList").innerHTML = "<img width='100%' src='"+ bucketURL + image +"'>";
 
-    for(var i = 0; i < items.length; i++){
-      markup+= "<button onclick='itemSelected("+i+")'>" +
-         '<p>' + items[i].name + '</p>'+
-         '<p>' + items[i].artistName + '</p>'+
-        "</button>"
-    }
-    document.getElementById("itemList").innerHTML = markup;
-  });
 }
 
 
