@@ -8,31 +8,24 @@
   <script>
 var fileUploaded = function()
 {
-   var file = $('#theFile').get(0);
-   var fileObj = $('#theFile').get(0).files[0]
-   var filename = fileObj.name;
-   var ext = filename.split(".");
-   ext = ext[ext.length-1];
-   console.log(ext);
- 
+  var file = $('#theFile').get(0);
+  var fileObj = $('#theFile').get(0).files[0]
   var reader = new FileReader();
   reader.onloadend = function() {
-    console.log('RESULT', reader.result)
+    var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
+     $.post("../uploadImage",
+      {
+        data: reader.result,
+        fileInput:fileInput
+      },
+      function(data, status){
 
-   var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
-
-   $.post("../uploadImage",
-	  {
-	    data: reader.result,
-      fileInput:fileInput
-	  },
-	  function(data, status){
-
-	  });
-     
+      });
   }
   reader.readAsDataURL(fileObj);
 }
+
+
 var doLogout = function()
 {
   var x = confirm("Logout now?")
