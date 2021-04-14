@@ -3,6 +3,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src='asyncReq.js'> </script>
   <link rel='stylesheet' href='style.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <script src='script.js'>
   </script>
   <script>
@@ -45,8 +47,9 @@ var doLogout = function()
   <div id='feedList'>
   </div>
   <div id='itemListWrapper'>
-    <button onclick='editFeed()' style='display:none'> Edit Image</button>
-    <button onclick='deleteFeed()' style='display:none'> Delete Image</button>
+    <button onclick='goBack()' id='backButton' style=''> Back </button>
+    <button onclick='editFeed()' id='editButton' style='display:none'> Edit Image</button>
+    <button onclick='deleteFeed()' id='deleteButton' style='display:none'> Delete Image</button>
     <div id='itemList'>
     </div>
   </div>

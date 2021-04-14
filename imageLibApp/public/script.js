@@ -8,7 +8,10 @@ function generateFeedMarkup()
 {
   var markup = "";
   for(var i = 0; i < allFeeds.length; i++){
-    markup += "<button onclick='feedSelected("+i+")'>" + allFeeds[i].name + "</button>"
+    markup += "<button onclick='feedSelected("+i+")'>"  
+    + "<img style='float:left' height=50 src='"+ bucketURL + allFeeds[i].image +"'>"
+    +"<p>"+  allFeeds[i].name + "</p>"+
+     "</button>"
   }
   document.getElementById("feedList").innerHTML = markup;
 }
@@ -64,9 +67,17 @@ function itemSelected(n)
   document.getElementById("itemDetails").innerHTML = markup;
 }
  
+function goBack()
+{
+  $("body").removeClass("details")
+  $("#feedList button").removeClass("active");
+}
+
 function feedSelected(n)
 {
-  $("#itemListWrapper button").show();
+  $("body").addClass("details")
+  $("#itemListWrapper #editButton").show();
+  $("#itemListWrapper #deleteButton").show();
   $("#feedList button").removeClass("active");
   $("#feedList button:nth-of-type("+ (n+1) +")").addClass("active");
   currFeed = n;
