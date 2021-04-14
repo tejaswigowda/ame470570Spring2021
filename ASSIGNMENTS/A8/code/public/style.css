@@ -1,0 +1,72 @@
+body{
+  margin:0;
+}
+
+
+
+#backButton{
+  display:none;
+}
+
+#feedList
+{
+  width: 30%;
+  left: 0;
+  height: 100vh;
+  overflow: scroll;
+  background: gray;
+  position:absolutel
+}
+#itemListWrapper
+{
+  width: 70%;
+  position:absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  overflow: scroll;
+  background: lightgray;
+}
+#itemDetails
+{
+  width: 40%;
+  position:absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  overflow: scroll;
+  text-align:center;
+}
+.active{
+  background:gold;
+}
+#feedList button,
+#itemList button{
+  width: 100%;
+  min-height: 50px;
+}
+
+@media (max-width:600px){
+  #feedList{
+    min-width: 100%;
+  }
+  #itemListWrapper{
+    min-width: 100%;
+    display: none;
+    margin-left: 0;
+  }
+
+  body.details #theFile{
+    display: none;
+  }
+  body.details #feedList{
+    display: none;
+  }
+  body.details #itemListWrapper{
+    display: block;
+  }
+  #backButton{
+    display:block;
+  }
+
+}

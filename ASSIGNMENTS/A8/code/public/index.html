@@ -1,0 +1,62 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src='asyncReq.js'> </script>
+  <link rel='stylesheet' href='style.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src='script.js'>
+  </script>
+  <script>
+var fileUploaded = function()
+{
+  var file = $('#theFile').get(0);
+  var fileObj = $('#theFile').get(0).files[0]
+   var filename = fileObj.name;
+   var ext = filename.split(".");
+   ext = ext[ext.length-1];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
+     $.post("../uploadImage",
+      {
+        data: reader.result,
+        userID: userObj.local.email,
+        fileInput:fileInput
+      },
+      function(data, status){
+        console.log(data);
+        allFeeds = JSON.parse(data);
+        generateFeedMarkup();
+      });
+  }
+  reader.readAsDataURL(fileObj);
+}
+
+
+var doLogout = function()
+{
+  var x = confirm("Logout now?")
+  if(x){
+    loadFile("./logout", function(d){window.location.reload()})
+  }
+}
+  </script>
+</head>
+<body onload='start()'>
+  <div id='feedList'>
+  </div>
+  <div id='itemListWrapper'>
+    <button onclick='goBack()' id='backButton' style=''> Back </button>
+    <button onclick='editFeed()' id='editButton' style='display:none'> Edit Image</button>
+    <button onclick='deleteFeed()' id='deleteButton' style='display:none'> Delete Image</button>
+    <div id='itemList'>
+    </div>
+  </div>
+  <input type="file" style='position:fixed;bottom:0' onchange='fileUploaded()'
+       id="theFile" name="theFile"
+       accept="image/png, image/jpeg">
+
+  <button onclick='doLogout()' style='position:fixed;top:5px;right:5px'> Logout </button>
+</body>
+</html>
